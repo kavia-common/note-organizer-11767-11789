@@ -1,0 +1,71 @@
+<aside class="sidebar">
+  <div class="brand">
+    <div class="logo">🗒️</div>
+    <div class="title">
+      <span class="app-name">Notes</span>
+      <span class="subtitle">Organize your ideas</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <input
+      type="text"
+      class="search"
+      [value]="search()"
+      (input)="onSearchChange(($any($event.target).value || ''))"
+      placeholder="Search notes..."
+      aria-label="Search notes"
+    />
+
+    <div class="filters">
+      <select
+        class="tag-select"
+        [value]="tag()"
+        (change)="onTagChange(($any($event.target).value || 'all'))"
+        aria-label="Filter by tag"
+      >
+        <option *ngFor="let t of tags" [value]="t">{{ t | titlecase }}</option>
+      </select>
+
+      <button class="btn small"
+              [class.active]="favOnly()"
+              (click)="toggleFavOnly()"
+              title="Show only favorites"
+              [attr.aria-pressed]="favOnly()">
+        <span class="icon">★</span>
+        Fav
+      </button>
+    </div>
+
+    <button class="btn primary" (click)="createNote()">
+      + New note
+    </button>
+  </div>
+
+  <div class="list" role="list">
+    <div
+      class="list-item"
+      *ngFor="let n of notes(); trackBy: trackById"
+      [class.selected]="selectedId() === n.id"
+      (click)="selectNote(n.id)"
+      role="listitem"
+      tabindex="0"
+    >
+      <div class="item-title">
+        <span class="fav" [class.on]="n.favorite" (click)="toggleFavorite(n.id, $event)">★</span>
+        <span class="text">{{ n.title || 'Untitled note' }}</span>
+      </div>
+      <div class="item-meta">
+        <span class="date">{{ n.updatedAt | date:'MMM d, y, h:mm a' }}</span>
+        <span class="tags">
+          <span class="tag" *ngFor="let t of n.tags">{{ t }}</span>
+        </span>
+      </div>
+      <button class="icon-btn danger" (click)="deleteNote(n.id, $event)" title="Delete">🗑️</button>
+    </div>
+
+    <div class="empty" *ngIf="notes().length === 0">
+      No notes match your filters.
+    </div>
+  </div>
+</aside>
