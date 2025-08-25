@@ -1,0 +1,51 @@
+<section class="editor" *ngIf="!isEmpty(); else emptyState">
+  <div class="editor-header">
+    <input
+      class="title-input"
+      [value]="note()?.title || ''"
+      (input)="onTitleChange(($any($event.target).value || ''))"
+      placeholder="Title"
+      aria-label="Note title"
+    />
+    <div class="header-actions">
+      <button class="btn ghost" (click)="toggleFavorite()" [title]="(note()?.favorite ? 'Unfavorite' : 'Favorite')">
+        <span class="star" [class.on]="note()?.favorite">★</span>
+        <span>{{ note()?.favorite ? 'Favorited' : 'Favorite' }}</span>
+      </button>
+      <button class="btn danger" (click)="deleteCurrent()" title="Delete note">Delete</button>
+    </div>
+  </div>
+
+  <div class="tag-row">
+    <span class="label">Tags:</span>
+    <button
+      *ngFor="let t of allTags"
+      class="chip"
+      [class.active]="isTagActive(t)"
+      (click)="toggleTag(t)"
+      type="button"
+    >
+      {{ t }}
+    </button>
+  </div>
+
+  <textarea
+    class="content-input"
+    [value]="note()?.content || ''"
+    (input)="onContentChange(($any($event.target).value || ''))"
+    placeholder="Start writing..."
+    aria-label="Note content"
+  ></textarea>
+
+  <div class="dates">
+    <span>Created: {{ note()?.createdAt | date:'MMM d, y, h:mm a' }}</span>
+    <span>Updated: {{ note()?.updatedAt | date:'MMM d, y, h:mm a' }}</span>
+  </div>
+</section>
+
+<ng-template #emptyState>
+  <section class="empty-editor">
+    <h3>Select or create a note</h3>
+    <p>Use the sidebar to create a new note or pick one to edit.</p>
+  </section>
+</ng-template>

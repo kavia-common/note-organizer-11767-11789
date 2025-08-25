@@ -1,0 +1,124 @@
+:root {
+  --primary: #1976d2;
+  --accent: #ff4081;
+  --border: #e5e7eb;
+  --surface: #f7f9fc;
+  --text: #1f2937;
+  --muted: #6b7280;
+}
+
+.editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  gap: 12px;
+}
+
+.editor-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title-input {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 20px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.title-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(25,118,210,0.15);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+.btn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+}
+.btn.ghost {
+  background: var(--surface);
+}
+.btn.danger {
+  border-color: #ef4444;
+  color: #ffffff;
+  background: #ef4444;
+}
+
+.star {
+  margin-right: 6px;
+  color: #c9c9c9;
+}
+.star.on {
+  color: #f1b300;
+}
+
+.tag-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.label {
+  color: var(--muted);
+  font-size: 12px;
+}
+.chip {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+.chip.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.content-input {
+  flex: 1;
+  resize: none;
+  min-height: 300px;
+  padding: 14px;
+  line-height: 1.6;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.content-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(25,118,210,0.15);
+}
+
+.dates {
+  display: flex;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--border);
+}
+
+.empty-editor {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--muted);
+  padding: 20px;
+}
